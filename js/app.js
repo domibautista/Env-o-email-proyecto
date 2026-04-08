@@ -17,6 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        if(event.target.id === 'email' && !validarEmail(event.target.value)) {
+            mostrarAlerta('email invalido', event.target.parentElement);
+            return;
+        }
+
         limpiarAlerta(event.target.parentElement);
     }   
 
@@ -41,4 +46,11 @@ function limpiarAlerta(referencia) {
     if(alerta) {
         alerta.remove();
     }
+}
+
+function validarEmail (email) {
+    //Usamos una expresion regular para validar que este bien estructurado el mail
+    const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+    const resultado = regex.test(email);
+    return resultado;
 }
